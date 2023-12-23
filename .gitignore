@@ -1,0 +1,30 @@
+node_modules
+dist
+.idea
+.cache
+.env
+
+# Lerna
+lerna-debug.log
+
+# Package Specific Ignores
+artefacts
+dist-storybook
+dist-cosmos
+output
+
+# Yarn Zero Install
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Jest
+coverage
+junit.xml
+
+# lerna
+lerna-debug.log

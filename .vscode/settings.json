@@ -1,0 +1,27 @@
+{
+  "files.associations": {
+    "plyconfig.json": "jsonc"
+  },
+
+  // Yarn 3.8+ Setup
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "eslint.nodePath": ".yarn/sdks",
+
+  // Typescript Setup
+  // "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Tailwind Setup
+  "css.customData": [".vscode/tailwind.json"],
+  "scss.lint.unknownAtRules": "ignore",
+  "tailwindCSS.experimental.classRegex": [
+    ["(?<=tv\\()[^]*?(?=}\\))", "(?<=['\"])[\\w\\-\\s:\\[\\]\\.]*?(?=['\"])"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}

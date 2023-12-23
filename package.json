@@ -1,0 +1,79 @@
+{
+  "name": "onionui",
+  "version": "0.0.133",
+  "type": "module",
+  "main": "dist/main.umd.js",
+  "module": "dist/main.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/main.esm.js",
+      "require": "./dist/main.umd.js"
+    },
+    "./theme/base": "./dist/assets/main.esm.css"
+  },
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "start": "yarn clean:dist && cosmos",
+    "build": "yarn clean:dist && yarn ts:check && concurrently yarn:build:umd yarn:build:esm",
+    "watch": "yarn clean:dist && concurrently -c 'auto,auto,green' yarn:watch:umd yarn:watch:esm yarn:ts:watch",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "build:esm": "vite build --mode esm",
+    "build:umd": "vite build --mode umd",
+    "build:cosmos": "yarn clean:dist-cosmos && cosmos-export",
+    "watch:esm": "yarn build:esm --watch",
+    "watch:umd": "yarn build:umd --watch",
+    "ts:check": "tsc --p ./tsconfig.build.json",
+    "ts:watch": "yarn ts:check -w",
+    "export": "cross-env ARTE_PATH=\"../../artefacts/npm/onion-ui\" npm run export:artefact",
+    "export:artefact": "cross-env-shell \"yarn pack --out $ARTE_PATH/%s-%v.tgz && powershell Copy-Item ./package.json -Destination $ARTE_PATH -Force\"",
+    "clean:dist": "rimraf ./dist",
+    "clean:dist-cosmos": "rimraf ./dist-cosmos",
+    "tool:regen-figma-css": "node ./src/scripts/TailwindCssGenerator.run.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.1.0",
+    "tailwind-variants": "^0.1.18",
+    "tailwindcss": "^3.3.6"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.16",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "glob": "^10.3.10",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "react": "^18.2.0",
+    "react-cosmos": "next",
+    "react-cosmos-plugin-vite": "next",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "tailwind-merge": "^2.1.0",
+    "tailwind-variants": "^0.1.18",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.4",
+    "vite-plugin-lib-inject-css": "^1.3.0"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  }
+}
